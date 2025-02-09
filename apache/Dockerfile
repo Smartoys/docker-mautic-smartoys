@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libcurl4-gnutls-dev \
     libc-client-dev \
     libkrb5-dev \
-    libmcrypt-dev \
     libssl-dev \
     libxml2-dev \
     libzip-dev \
@@ -39,7 +38,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libc-client-dev
 
 RUN apt-get update && apt-get install -y \
-    libc-client-dev \
     libkrb5-dev
 
 
@@ -62,6 +60,8 @@ RUN docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath socket
 
 # Install the amqp extension via PECL.
 RUN pecl install amqp && docker-php-ext-enable amqp
+
+RUN pecl install mcrypt-1.0.6 && docker-php-ext-enable mcrypt
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
