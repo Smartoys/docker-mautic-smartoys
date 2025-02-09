@@ -35,18 +35,28 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     librabbitmq-dev \
     unzip \
     nodejs \
-    npm
+    npm \
+    libc-client-dev
 
 RUN curl -L -o /tmp/amqp.tar.gz "https://github.com/php-amqp/php-amqp/archive/refs/tags/v2.1.1.tar.gz" \
     && mkdir -p /usr/src/php/ext/amqp \
     && tar -C /usr/src/php/ext/amqp -zxvf /tmp/amqp.tar.gz --strip 1 \
     && rm /tmp/amqp.tar.gz
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-configure opcache --enable-opcache \
-    && docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache \
-    && docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
+# Configure the gd extension.
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# Configure the imap extension.
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+
+# Configure the opcache extension.
+RUN docker-php-ext-configure opcache --enable-opcache
+
+# Install the PHP extensions.
+RUN docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
+
+# Enable the PHP extensions.
+RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
