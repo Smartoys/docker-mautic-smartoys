@@ -64,22 +64,21 @@ RUN pecl install amqp && docker-php-ext-enable amqp
 # ---------------------------------------------
 # Build and install libmcrypt from source.
 # ---------------------------------------------
-    RUN wget https://downloads.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz \
+# Install libmcrypt from source
+RUN wget https://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz \
     && tar -xzf libmcrypt-2.5.8.tar.gz \
     && cd libmcrypt-2.5.8 \
     && ./configure \
     && make \
     && make install \
-    && cd .. \
-    && rm -rf libmcrypt-2.5.8 libmcrypt-2.5.8.tar.gz
+    && ldconfig \
+    && rm -rf ../libmcrypt-2.5.8*
 
+# Install mcrypt PHP extension
+RUN pecl install mcrypt-1.0.6 \
+    && docker-php-ext-enable mcrypt
 # Update the linker cache so PHP can find the new library.
-RUN ldconfig
 
-# ---------------------------------------------
-# Now install the mcrypt extension via PECL.
-# ---------------------------------------------
-RUN pecl install mcrypt-1.0.6 && docker-php-ext-enable mcrypt
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
