@@ -18,8 +18,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  DOCKERHUB_USERNAME: molluxmollux
-  IMAGE_NAME: ${{ github.repository }}
+  DOCKERHUB_USERNAME: dsonnet
+  IMAGE_NAME: docker-mautic-smartoys
 
 jobs:
   build-and-push-image:
