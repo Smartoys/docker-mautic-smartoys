@@ -1,4 +1,4 @@
-FROM php:8.1-apache as builder
+FROM php:8.1-apache AS builder
 
 LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
@@ -58,7 +58,10 @@ RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 RUN docker-php-ext-configure opcache --enable-opcache
 
 # Install the PHP extensions.
-RUN docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
+RUN docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif gd imap opcache
+
+# Install the amqp extension via PECL.
+RUN pecl install amqp && docker-php-ext-enable amqp
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
