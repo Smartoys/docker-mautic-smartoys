@@ -1,0 +1,25 @@
+# use this file for environment variables that can be used.
+# see https://docs.mautic.org/en/5.x/
+
+MAUTIC_DB_HOST="${MYSQL_HOST}"
+MAUTIC_DB_PORT="${MYSQL_PORT}"
+MAUTIC_DB_DATABASE="${MYSQL_DATABASE}"
+MAUTIC_DB_USER="${MYSQL_USER}"
+MAUTIC_DB_PASSWORD="${MYSQL_PASSWORD}"
+
+MAUTIC_MESSENGER_DSN_EMAIL="amqp://guest:guest@rabbitmq:5672/mautic_smartoys/messages"
+MAUTIC_MESSENGER_DSN_HIT="amqp://guest:guest@rabbitmq:5672/mautic_smartoys/messages"
+
+previous="sync://'"
+
+MAUTIC_TRUSTED_PROXIES='["0.0.0.0/0"]'
+
+
+MAUTIC_SITE_URL="https://mailing.cld.eu"
+
+MAUTIC_MAILER_FROM_NAME="Cld Distribution"
+MAUTIC_MAILER_FROM_EMAIL="newsletter@cld.eu"
+MAUTIC_MAILER_TRANSPORT="smtp"
+MAUTIC_MAILER_HOST="smtprelay"
+MAUTIC_MAILER_PORT=25
+
