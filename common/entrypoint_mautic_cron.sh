@@ -12,6 +12,8 @@ BASH_ENV=/tmp/cron.env
 * * * * * php /var/www/html/bin/console mautic:segments:update 2>&1 | tee /tmp/stdout
 * * * * * php /var/www/html/bin/console mautic:campaigns:update 2>&1 | tee /tmp/stdout
 * * * * * php /var/www/html/bin/console mautic:campaigns:trigger 2>&1 | tee /tmp/stdout
+*/10 * * * * php /var/www/html/bin/console mautic:broadcast:send 2>&1 | tee /tmp/stdout
+
 
 EOF
 fi
