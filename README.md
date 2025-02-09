@@ -3,6 +3,11 @@
 > [!NOTE]
 > _This version refers to Docker images and examples for Mautic 5. If you would like information about older versions, see https://github.com/mautic/docker-mautic/tree/mautic4._
 
+Updated for handling cron : bin/console mautic:broadcast:send
+
+
+
+
 ## Versions
 
 all Mautic 5 Docker images follow the following naming stategy.
