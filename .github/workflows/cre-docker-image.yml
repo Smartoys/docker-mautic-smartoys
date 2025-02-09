@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image_type: [apache, fpm]
+        image_type: [apache]
     permissions:
       contents: read
       packages: write
