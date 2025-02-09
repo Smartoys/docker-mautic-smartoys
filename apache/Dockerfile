@@ -38,6 +38,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     npm \
     libc-client-dev
 
+RUN apt-get update && apt-get install -y \
+    libc-client-dev \
+    libkrb5-dev
+
+
 RUN curl -L -o /tmp/amqp.tar.gz "https://github.com/php-amqp/php-amqp/archive/refs/tags/v2.1.1.tar.gz" \
     && mkdir -p /usr/src/php/ext/amqp \
     && tar -C /usr/src/php/ext/amqp -zxvf /tmp/amqp.tar.gz --strip 1 \
@@ -46,8 +51,8 @@ RUN curl -L -o /tmp/amqp.tar.gz "https://github.com/php-amqp/php-amqp/archive/re
 # Configure the gd extension.
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
-# Configure the imap extension.
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+# Configure the imap extension
+RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 
 # Configure the opcache extension.
 RUN docker-php-ext-configure opcache --enable-opcache
