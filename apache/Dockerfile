@@ -100,7 +100,6 @@ RUN docker-php-ext-enable curl
 RUN docker-php-ext-enable pdo_mysql 
 RUN docker-php-ext-enable zip 
 RUN docker-php-ext-enable bcmath
-RUN docker-php-ext-enable sockets 
 RUN docker-php-ext-enable exif
 RUN docker-php-ext-enable amqp
 RUN docker-php-ext-enable gd
