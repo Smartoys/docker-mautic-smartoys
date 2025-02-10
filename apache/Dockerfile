@@ -3,6 +3,9 @@ FROM php:8.1-apache AS builder
 LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
 
+# Lower optimization level for compilation
+ENV CFLAGS="-O0"
+
 # Install the dependency required for compiling the mcrypt extension,
 # install mcrypt via PECL, enable the extension, and clean up.
 RUN apt-get update && \
