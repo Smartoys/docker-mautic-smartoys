@@ -93,7 +93,19 @@ RUN docker-php-ext-install opcache
 RUN pecl install amqp && docker-php-ext-enable amqp
 
 # Enable the PHP extensions.
-RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
+RUN docker-php-ext-enable intl 
+RUN docker-php-ext-enable mbstring
+RUN docker-php-ext-enable mysqli 
+RUN docker-php-ext-enable curl 
+RUN docker-php-ext-enable pdo_mysql 
+RUN docker-php-ext-enable zip 
+RUN docker-php-ext-enable bcmath
+RUN docker-php-ext-enable sockets 
+RUN docker-php-ext-enable exif
+RUN docker-php-ext-enable amqp
+RUN docker-php-ext-enable gd
+RUN docker-php-ext-enable imap
+RUN docker-php-ext-enable opcache
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable mcrypt
