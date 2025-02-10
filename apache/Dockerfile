@@ -83,7 +83,8 @@ RUN docker-php-ext-install curl
 RUN docker-php-ext-install pdo_mysql 
 RUN docker-php-ext-install zip 
 RUN docker-php-ext-install bcmath 
-RUN docker-php-ext-install sockets 
+# Installed by default
+# RUN docker-php-ext-install sockets 
 RUN docker-php-ext-install exif 
 RUN docker-php-ext-install gd 
 RUN docker-php-ext-install opcache
