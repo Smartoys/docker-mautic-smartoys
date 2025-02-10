@@ -12,6 +12,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
+RUN apt-get update && apt-get install -y \
+    libc-client-dev \
+    libkrb5-dev 
+
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install imap
+
 
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -62,8 +69,6 @@ RUN curl -L -o /tmp/amqp.tar.gz "https://github.com/php-amqp/php-amqp/archive/re
 # Configure the gd extension.
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
-# Configure the imap extension
-RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 
 # Configure the opcache extension.
 RUN docker-php-ext-configure opcache --enable-opcache
@@ -81,7 +86,6 @@ RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install sockets 
 RUN docker-php-ext-install exif 
 RUN docker-php-ext-install gd 
-RUN docker-php-ext-install imap 
 RUN docker-php-ext-install opcache
 
 # Install the amqp extension via PECL.
