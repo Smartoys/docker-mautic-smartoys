@@ -106,8 +106,7 @@ RUN docker-php-ext-enable gd
 RUN docker-php-ext-enable imap
 RUN docker-php-ext-enable opcache
 
-# Enable the PHP extensions.
-RUN docker-php-ext-enable mcrypt
+
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
