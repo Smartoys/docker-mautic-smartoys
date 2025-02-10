@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libpng-dev \
     libgif-dev \
     libtiff-dev \
-    libz-dev \
+    zlib1g-dev \
     libpq-dev \
     imagemagick \
     graphicsmagick \
@@ -35,9 +35,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     librabbitmq-dev \
     unzip \
     nodejs \
-    npm \
-    libc-client-dev \
-    libkrb5-dev
+    npm 
 
 # Install the dependency required for compiling the mcrypt extension,
 # install mcrypt via PECL, enable the extension, and clean up.
