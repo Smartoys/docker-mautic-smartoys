@@ -1,4 +1,4 @@
-FROM php:8.1-apache AS builder
+FROM php:8.0-apache AS builder
 
 LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libcurl4-gnutls-dev \
     libc-client-dev \
     libkrb5-dev \
+    libmcrypt-dev \
     libssl-dev \
     libxml2-dev \
     libzip-dev \
@@ -61,27 +62,11 @@ RUN docker-php-ext-install intl mbstring mysqli curl pdo_mysql zip bcmath socket
 # Install the amqp extension via PECL.
 RUN pecl install amqp && docker-php-ext-enable amqp
 
-# ---------------------------------------------
-# Build and install libmcrypt from source.
-# ---------------------------------------------
-# Install libmcrypt from source
-RUN wget https://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz \
-    && tar -xzf libmcrypt-2.5.8.tar.gz \
-    && cd libmcrypt-2.5.8 \
-    && ./configure \
-    && make \
-    && make install \
-    && ldconfig \
-    && rm -rf ../libmcrypt-2.5.8*
-
-# Install mcrypt PHP extension
-RUN pecl install mcrypt-1.0.6 \
-    && docker-php-ext-enable mcrypt
-# Update the linker cache so PHP can find the new library.
-
-
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl mbstring mysqli curl pdo_mysql zip bcmath sockets exif amqp gd imap opcache
+
+# Enable the PHP extensions.
+RUN docker-php-ext-enable mcrypt
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
