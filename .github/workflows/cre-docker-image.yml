@@ -76,6 +76,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
+          no-cache: true
           file: ${{ matrix.image_type }}/Dockerfile
           context: .
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:cache-${{ matrix.image_type }}

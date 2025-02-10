@@ -3,26 +3,6 @@ FROM php:8.1-apache AS builder
 LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
 
-# Lower optimization level for compilation
-ENV CFLAGS="-O0"
-
-# Install the dependency required for compiling the mcrypt extension,
-# install mcrypt via PECL, enable the extension, and clean up.
-RUN apt-get update && \
-    apt-get install -y libmcrypt-dev && \
-    pecl install mcrypt-1.0.5 && \
-    docker-php-ext-enable mcrypt && \
-    rm -rf /var/lib/apt/lists/*
-
-
-RUN apt-get update && apt-get install -y \
-    libc-client-dev \
-    libkrb5-dev 
-
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install imap
-
-
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates \
@@ -56,10 +36,17 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     unzip \
     nodejs \
     npm \
-    libc-client-dev
-
-RUN apt-get update && apt-get install -y \
+    libc-client-dev \
     libkrb5-dev
+
+# Install the dependency required for compiling the mcrypt extension,
+# install mcrypt via PECL, enable the extension, and clean up.
+RUN pecl install mcrypt-1.0.5 && \
+    docker-php-ext-enable mcrypt && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install imap    
 
 # Configure and install the PHP intl extension
 RUN docker-php-ext-configure intl
@@ -75,7 +62,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Configure the opcache extension.
 RUN docker-php-ext-configure opcache --enable-opcache
-
 
 
 # Install the PHP extensions.
