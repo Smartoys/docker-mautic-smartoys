@@ -51,6 +51,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN apt-get update && apt-get install -y \
     libkrb5-dev
 
+# Configure and install the PHP intl extension
+RUN docker-php-ext-configure intl
 
 RUN curl -L -o /tmp/amqp.tar.gz "https://github.com/php-amqp/php-amqp/archive/refs/tags/v2.1.1.tar.gz" \
     && mkdir -p /usr/src/php/ext/amqp \
@@ -66,8 +68,7 @@ RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 # Configure the opcache extension.
 RUN docker-php-ext-configure opcache --enable-opcache
 
-# Configure and install the PHP intl extension
-RUN docker-php-ext-configure intl
+
 
 # Install the PHP extensions.
 RUN docker-php-ext-install intl 
