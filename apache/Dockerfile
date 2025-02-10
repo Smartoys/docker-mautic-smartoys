@@ -4,6 +4,7 @@ LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
 
 # Install PHP extensions
+# Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates \
     build-essential  \
@@ -30,6 +31,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libxpm-dev \
     libaprutil1-dev \
     libicu-dev \
+    icu-devtools \ 
     libfreetype6-dev \
     libonig-dev \
     librabbitmq-dev \
@@ -62,19 +64,18 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-configure opcache --enable-opcache
 
 
-# Install the PHP extensions.
-RUN docker-php-ext-install intl 
-RUN docker-php-ext-install mbstring 
-RUN docker-php-ext-install mysqli 
-RUN docker-php-ext-install curl 
-RUN docker-php-ext-install pdo_mysql 
-RUN docker-php-ext-install zip 
-RUN docker-php-ext-install bcmath 
-# Installed by default
-# RUN docker-php-ext-install sockets 
-RUN docker-php-ext-install exif 
-RUN docker-php-ext-install gd 
-RUN docker-php-ext-install opcache
+# Install all PHP extensions in one RUN command
+RUN docker-php-ext-install \
+    intl \
+    mbstring \
+    mysqli \
+    curl \
+    pdo_mysql \
+    zip \
+    bcmath \
+    exif \
+    gd \
+    opcache
 
 # Install the amqp extension via PECL.
 RUN pecl install amqp && docker-php-ext-enable amqp
