@@ -67,7 +67,7 @@ RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 RUN docker-php-ext-configure opcache --enable-opcache
 
 # Configure and install the PHP intl extension
-RUN docker-php-ext-configure intl --with-icu-dir=/usr 
+RUN docker-php-ext-configure intl
 
 # Install the PHP extensions.
 RUN docker-php-ext-install intl 
