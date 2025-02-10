@@ -11,6 +11,8 @@ RUN apt-get update && \
     docker-php-ext-enable mcrypt && \
     rm -rf /var/lib/apt/lists/*
 
+
+
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates \
@@ -63,6 +65,9 @@ RUN docker-php-ext-configure imap --with-imap --with-imap-ssl --with-kerberos
 
 # Configure the opcache extension.
 RUN docker-php-ext-configure opcache --enable-opcache
+
+# Configure and install the PHP intl extension
+RUN docker-php-ext-configure intl --with-icu-dir=/usr 
 
 # Install the PHP extensions.
 RUN docker-php-ext-install intl 
