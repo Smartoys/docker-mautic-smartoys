@@ -1,7 +1,15 @@
-FROM php:8.0-apache AS builder
+FROM php:8.1-apache AS builder
 
 LABEL vendor="Mautic"
 LABEL maintainer="Mautic core team <>"
+
+# Install the dependency required for compiling the mcrypt extension,
+# install mcrypt via PECL, enable the extension, and clean up.
+RUN apt-get update && \
+    apt-get install -y libmcrypt-dev && \
+    pecl install mcrypt-1.0.5 && \
+    docker-php-ext-enable mcrypt && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
