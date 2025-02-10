@@ -66,7 +66,6 @@ RUN docker-php-ext-configure opcache --enable-opcache
 
 # Install all PHP extensions in one RUN command
 RUN docker-php-ext-install \
-    intl \
     mbstring \
     mysqli \
     curl \
@@ -79,6 +78,8 @@ RUN docker-php-ext-install \
 
 # Install the amqp extension via PECL.
 RUN pecl install amqp && docker-php-ext-enable amqp
+
+RUN apt-get update && apt-get install -y php8.1-intl 
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl 
