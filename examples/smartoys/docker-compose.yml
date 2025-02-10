@@ -86,12 +86,12 @@ services:
         - "traefik.enable=true"
     #   - "traefik.http.routers.mautic.tls=true"
         - "traefik.http.middlewares.mautic.compress=true"
-
+        - "traefik.http.middlewares.mautic-headers.forwardedheaders.trustedips=0.0.0.0/0"
         - "traefik.http.middlewares.mautic-redirect-websecure.redirectscheme.scheme=https"
         - "traefik.http.routers.mautic.middlewares=mautic-redirect-websecure"
         - "traefik.http.routers.mautic.rule=Host(`mailing.smartoys.be`, `mautic.smartoys.be` )"
         - "traefik.http.routers.mautic.entrypoints=web"
-
+        
         - "traefik.http.routers.mautic-secure.rule=Host(`mailing.smartoys.be`, `mautic.smartoys.be`)"
         - "traefik.http.routers.mautic-secure.entrypoints=websecure"
         - "traefik.http.routers.mautic-secure.tls.certresolver=letsencryptresolver"
@@ -204,7 +204,7 @@ services:
         - "traefik.enable=true"
     #   - "traefik.http.routers.mautic_dlgamer_com.tls=true"
         - "traefik.http.middlewares.mautic_dlgamer_com.compress=true"
-
+        - "traefik.http.middlewares.mautic-headers.forwardedheaders.trustedips=0.0.0.0/0"
         - "traefik.http.middlewares.mautic_dlgamer_com-redirect-websecure.redirectscheme.scheme=https"
         - "traefik.http.routers.mautic_dlgamer_com.middlewares=mautic_dlgamer_com-redirect-websecure"
         - "traefik.http.routers.mautic_dlgamer_com.rule=Host(`mailing.dlgamer.com`, `mautic.dlgamer.com`)"
@@ -255,7 +255,7 @@ services:
         - "traefik.enable=true"
     #   - "traefik.http.routers.mautic_gameo_com.tls=true"
         - "traefik.http.middlewares.mautic_gameo_com.compress=true"
-
+        - "traefik.http.middlewares.mautic-headers.forwardedheaders.trustedips=0.0.0.0/0"
         - "traefik.http.middlewares.mautic_gameo_com-redirect-websecure.redirectscheme.scheme=https"
         - "traefik.http.routers.mautic_gameo_com.middlewares=mautic_gameo_com-redirect-websecure"
         - "traefik.http.routers.mautic_gameo_com.rule=Host(`mailing.gameo.com`, `mautic.gameo.com`)"
