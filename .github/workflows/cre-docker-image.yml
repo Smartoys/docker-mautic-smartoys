@@ -1,4 +1,4 @@
-name: Build and publish a Docker image
+name: Build and publish Mautic 5 Docker image
 
 on:
   workflow_dispatch:
