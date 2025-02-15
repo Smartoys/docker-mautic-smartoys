@@ -79,7 +79,8 @@ RUN docker-php-ext-install \
 # Install the amqp extension via PECL.
 RUN pecl install amqp && docker-php-ext-enable amqp
 
-RUN apt-get update && apt-get install -y php8.1-intl 
+# Install the intl extension using docker-php-ext-install
+RUN docker-php-ext-install intl
 
 # Enable the PHP extensions.
 RUN docker-php-ext-enable intl 
