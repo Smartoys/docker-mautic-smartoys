@@ -5,7 +5,13 @@
 
 Updated for handling cron : bin/console mautic:broadcast:send
 
+How to build in terminal : 
 
+docker buildx build --no-cache \
+  --file=apache/Dockerfile \
+  --platform=linux/amd64,linux/arm64 \
+  --build-arg MAUTIC_VERSION=5.2.1 \
+  --tag dsonnet/docker-mautic-smartoys:latest .
 
 
 ## Versions
